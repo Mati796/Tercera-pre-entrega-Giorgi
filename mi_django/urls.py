@@ -20,5 +20,6 @@ from mi_django import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.inicio)
+    path('', views.inicio),
+    path('crear_pokemon/<str:nombre>/<int:pokedex>/', views.crear_pokemon)
 ]
