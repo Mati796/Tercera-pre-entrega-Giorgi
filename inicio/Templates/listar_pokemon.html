@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   Pokemons
+{% endblock title %}
+
+
+{% block contenido %}
+   Listado de Pokemons
+{% endblock contenido %}
+
+{% block body %}
+<button>
+<a class="navbar-brand" href={% url 'crear_pokemon' %}>Crear Pokemon</a>
+<button>
+
+<form action="" method="get">
+   {{formulario}}
+   
+  <button>Buscar</button>
+</form>
+
+{% if pokemons %}
+{% for pokemon in pokemons %}
+<li>Pokemon: {{pokemon.nombre}} - Numero de Pokedex: {{pokemon.pokedex}}</li>
+{% endfor %}
+{% else %}
+<p>No se encontraron datos cargados.</p>
+{% endif %}
+{% endblock body %}

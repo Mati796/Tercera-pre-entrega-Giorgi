@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   Nuevo Gimnasio
+{% endblock title %}
+
+
+{% block contenido %}
+<h2> Se creo el gimnasio con nombre {{gimnasio.nombre}}, ubicado en la ciudad {{gimnasio.ciudad}} y que utiliza pokemons de tipo {{gimnasio.tipo_pokemon}}</h2>
+<button><a class="navbar-brand" href={% url 'crear_gimnasio' %}>Crear otro gimnasio</a></button>
+<button><a class="navbar-brand" href={% url 'listar_gimnasio' %}>Volver a lista de gimnasios</a></button>
+{% endblock contenido %}
+
+{% block body %}
+{% endblock body %}

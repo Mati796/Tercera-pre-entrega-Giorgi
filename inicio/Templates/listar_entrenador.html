@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   Entrenadores
+{% endblock title %}
+
+
+{% block contenido %}
+   Listado de Entrenadores
+{% endblock contenido %}
+
+{% block body %}
+<button>
+<a class="navbar-brand" href={% url 'crear_entrenador' %}>Crear Entrenador</a>
+<button>
+
+<form action="" method="get">
+   {{formulario2}}
+
+  <button>Buscar</button>
+</form>
+
+{% if entrenadores %}
+{% for entrenador in entrenadores %}
+<li>Entrenador: {{entrenador.nombre}} - Edad: {{entrenador.edad}} - Tipo de Pokemon: {{entrenador.tipo_pokemon}}</li>
+{% endfor %}
+{% else %}
+<p>No se encontraron datos cargados.</p>
+{% endif %}
+{% endblock body %}

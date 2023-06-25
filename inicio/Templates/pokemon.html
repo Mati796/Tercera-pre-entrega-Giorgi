@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   Nuevo Pokemon
+{% endblock title %}
+
+
+{% block contenido %}
+<h2> Se creo el pokemon con nombre {{pokemon.nombre}} y numero de pokedex {{pokemon.pokedex}}</h2>
+<button><a class="navbar-brand" href={% url 'crear_pokemon' %}>Crear otro pokemon</a></button>
+<button><a class="navbar-brand" href={% url 'listar_pokemon' %}>Volver a lista de pokemon</a></button>
+{% endblock contenido %}
+
+{% block body %}
+{% endblock body %}

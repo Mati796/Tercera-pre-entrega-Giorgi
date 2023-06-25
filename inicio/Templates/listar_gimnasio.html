@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   Gimnasios
+{% endblock title %}
+
+
+{% block contenido %}
+   Listado de Gimnasios
+{% endblock contenido %}
+
+{% block body %}
+<button>
+<a class="navbar-brand" href={% url 'crear_gimnasio' %}>Crear Gimnasio</a>
+<button>
+
+<form action="" method="get">
+   {{formulario}}
+   
+  <button>Buscar</button>
+</form>
+
+{% if gimnasios %}
+{% for gimnasio in gimnasios %}
+<li>Gimnasio: {{gimnasio.nombre}} - Ciudad: {{gimnasio.ciudad}} - Tipo de Pokemon: {{gimnasio.tipo_pokemon}}</li>
+{% endfor %}
+{% else %}
+<p>No se encontraron datos cargados.</p>
+{% endif %}
+{% endblock body %}
