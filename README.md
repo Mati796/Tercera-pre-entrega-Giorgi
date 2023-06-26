@@ -2,6 +2,10 @@
 
 Trabajo práctico número 3 - Giorgi 
 
+Requerimientos básicos:
+-Windows
+-Python 3.11.13
+
 1) Instalar las especificaciones del proyecto guardadas en el file requirements.txt corriendo el comando `pip install -r requirements.txt`.
 2) Correr el comando `python manage.py makemigrations`, y luego `python manage.py migrate`, para migrar los modelos a la base de datos.
 3) Ejecutar el comando `python manage.py runserver` e ir a la URL base del proyecto: http://localhost:8000/.
