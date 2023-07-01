@@ -22,7 +22,10 @@
 
 {% if pokemons %}
 {% for pokemon in pokemons %}
-<li>Pokemon: {{pokemon.nombre}} - Numero de Pokedex: {{pokemon.pokedex}}</li>
+<li>{{pokemon}}
+<button><a href={% url 'eliminar_pokemon' pokemon.id %}>Eliminar</a></button>
+<button><a href={% url 'modificar_pokemon' pokemon.id %}>Modificar</a></button>
+</li>
 {% endfor %}
 {% else %}
 <p>No se encontraron datos cargados.</p>

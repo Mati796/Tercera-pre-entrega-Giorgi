@@ -22,7 +22,9 @@
 
 {% if gimnasios %}
 {% for gimnasio in gimnasios %}
-<li>Gimnasio: {{gimnasio.nombre}} - Ciudad: {{gimnasio.ciudad}} - Tipo de Pokemon: {{gimnasio.tipo_pokemon}}</li>
+<li>{{gimnasio}}
+   <button><a href={% url 'eliminar_gimnasio' gimnasio.id %}>Eliminar</a></button>
+</li>
 {% endfor %}
 {% else %}
 <p>No se encontraron datos cargados.</p>

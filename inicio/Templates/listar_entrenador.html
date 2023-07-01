@@ -22,7 +22,9 @@
 
 {% if entrenadores %}
 {% for entrenador in entrenadores %}
-<li>Entrenador: {{entrenador.nombre}} - Edad: {{entrenador.edad}} - Tipo de Pokemon: {{entrenador.tipo_pokemon}}</li>
+<li>{{entrenador}}
+   <button><a href={% url 'eliminar_entrenador' entrenador.id %}>Eliminar</a></button>
+</li>
 {% endfor %}
 {% else %}
 <p>No se encontraron datos cargados.</p>

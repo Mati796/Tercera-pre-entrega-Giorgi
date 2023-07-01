@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.template import Template
 from inicio.models import Pokemon, Entrenador, Gimnasio
-from inicio.form import CrearPokemonFormulario, BuscarPokemonFormulario, CrearEntrenadorFormulario, BuscarEntrenadorFormulario, CrearGimnasioFormulario, BuscarGimnasioFormulario
+from inicio.form import CrearPokemonFormulario, BuscarPokemonFormulario, ModificarPokemonFormulario, CrearEntrenadorFormulario, BuscarEntrenadorFormulario, CrearGimnasioFormulario, BuscarGimnasioFormulario
 
 # Create your views here.
 
@@ -11,6 +11,7 @@ def Inicio(request):
 
 def about_us(request):
     return render (request,'about_us.html')
+
 
 
 def crear_pokemon(request):
@@ -41,6 +42,30 @@ def listar_pokemon(request):
       
     formulario = BuscarPokemonFormulario()
     return render(request,'listar_pokemon.html', {'formulario':formulario,'pokemons':listado_de_pokemons})
+
+def eliminar_pokemon(request, pokemon_id):
+    pokemon = Pokemon.objects.get(id=pokemon_id)
+    pokemon.delete()
+    
+    return redirect('listar_pokemon')
+
+def modificar_pokemon(request, pokemon_id):
+    pokemon_a_modificar = Pokemon.objects.get(id=pokemon_id)
+    
+    if request.method == 'POST':
+        formulario = ModificarPokemonFormulario(request.POST)
+        if formulario.is_valid():
+            info = formulario.cleaned_data
+            pokemon_a_modificar.nombre = info['nombre']
+            pokemon_a_modificar.pokedex = info['pokedex']
+            pokemon_a_modificar.save()
+            return redirect ('listar_pokemon')
+            
+        else: 
+            return render(request, 'modificar_pokemon.html',{'formulario':formulario})
+
+    formulario = ModificarPokemonFormulario(initial={'nombre':pokemon_a_modificar.nombre, "pokedex":pokemon_a_modificar.pokedex})
+    return render(request, 'modificar_pokemon.html',{'formulario':formulario})
 
 
 def crear_entrenador(request):
@@ -73,6 +98,12 @@ def listar_entrenador(request):
     formulario = BuscarEntrenadorFormulario()
     return render(request,'listar_entrenador.html', {'formulario2':formulario,'entrenadores':listado_de_entrenadores})
 
+def eliminar_entrenador(request, entrenador_id):
+    entrenador = Entrenador.objects.get(id=entrenador_id)
+    entrenador.delete()
+    
+    return redirect('listar_entrenador')
+
 
 
 def crear_gimnasio(request):
@@ -102,3 +133,10 @@ def listar_gimnasio(request):
         
     formulario = BuscarGimnasioFormulario()
     return render(request,'listar_gimnasio.html', {'formulario':formulario,'gimnasios':listado_de_gimnasios})
+
+
+def eliminar_gimnasio(request, gimnasio_id):
+    gimnasio = Gimnasio.objects.get(id=gimnasio_id)
+    gimnasio.delete()
+    
+    return redirect('listar_gimnasio')

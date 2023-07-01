@@ -1,12 +1,23 @@
 from django import forms
 
-class CrearPokemonFormulario (forms.Form):
+
+class PokemonFormularioBase(forms.Form):
     nombre = forms.CharField(max_length=20)
     pokedex = forms.IntegerField()
+
+class CrearPokemonFormulario (PokemonFormularioBase):
+   ...
     
+    
+class ModificarPokemonFormulario (PokemonFormularioBase):
+    ...
+
+
 class BuscarPokemonFormulario (forms.Form):
     nombre = forms.CharField(max_length=20, required=False)
     
+    
+
     
 class CrearEntrenadorFormulario (forms.Form):
     nombre = forms.CharField(max_length=20)
@@ -24,3 +35,5 @@ class CrearGimnasioFormulario (forms.Form):
     
 class BuscarGimnasioFormulario (forms.Form):
     nombre = forms.CharField(max_length=20, required=False)
+    
+    
