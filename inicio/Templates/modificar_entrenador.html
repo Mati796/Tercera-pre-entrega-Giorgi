@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   Modiciar Entrenador
+{% endblock title %}
+
+
+{% block contenido %}
+   Modificar Entrenador
+{% endblock contenido %}
+
+{% block body %}
+   
+   
+   <form action ="" method="POST">
+      {% csrf_token %}
+      <table>
+         {{formulario}}
+      </table>
+      <button>Modificar</button>
+   </form> 
+
+  
+{% endblock body %}

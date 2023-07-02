@@ -24,6 +24,7 @@
 {% for gimnasio in gimnasios %}
 <li>{{gimnasio}}
    <button><a href={% url 'eliminar_gimnasio' gimnasio.id %}>Eliminar</a></button>
+   <button><a href={% url 'modificar_gimnasio' gimnasio.id %}>Modificar</a></button>
 </li>
 {% endfor %}
 {% else %}

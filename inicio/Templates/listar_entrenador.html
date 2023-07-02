@@ -24,6 +24,7 @@
 {% for entrenador in entrenadores %}
 <li>{{entrenador}}
    <button><a href={% url 'eliminar_entrenador' entrenador.id %}>Eliminar</a></button>
+   <button><a href={% url 'modificar_entrenador' entrenador.id %}>Modificar</a></button>
 </li>
 {% endfor %}
 {% else %}
