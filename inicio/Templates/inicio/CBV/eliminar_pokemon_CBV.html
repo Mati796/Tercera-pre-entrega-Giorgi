@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   Eliminar Pokemon
+{% endblock title %}
+
+
+{% block contenido %}
+   Eliminar Pokemon
+{% endblock contenido %}
+
+{% block body %}
+   
+   
+   <form action ={% url 'Inicio:eliminar_pokemon' pokemon.id %} method="POST">
+      {% csrf_token %}
+      <p>Confirma el borrado de {{pokemon}}</p>      
+      <button>Confirmar</button>
+   </form> 
+
+  
+{% endblock body %}

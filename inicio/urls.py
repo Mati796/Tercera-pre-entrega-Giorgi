@@ -1,14 +1,21 @@
 
 from django.urls import path
 from inicio import views
+app_name = 'Inicio'
+
 
 urlpatterns = [
     path('', views.Inicio, name = 'Inicio'),
     path('about_us/', views.about_us, name = 'about_us'),
-    path('pokemon/', views.listar_pokemon, name='listar_pokemon'),
-    path('pokemon/crear/', views.crear_pokemon, name='crear_pokemon'),
-    path('pokemon/eliminar/<int:pokemon_id>/', views.eliminar_pokemon, name='eliminar_pokemon'),
-    path('pokemon/modificar/<int:pokemon_id>/', views.modificar_pokemon, name='modificar_pokemon'),
+    
+    
+    path('pokemon/', views.ListarPokemon.as_view(), name='listar_pokemon'),
+    path('pokemon/crear/',views.CrearPokemon.as_view(), name='crear_pokemon'),
+    path('pokemon/eliminar/<int:pk>/', views.EliminarPokemon.as_view(), name='eliminar_pokemon'),
+    path('pokemon/modificar/<int:pk>/', views.ModificarPokemon.as_view(), name='modificar_pokemon'),
+    path('pokemon/<int:pk>/', views.MostrarPokemon.as_view(), name='mostrar_pokemon'),
+    
+    
     path('entrenador/', views.listar_entrenador, name='listar_entrenador'),
     path('entrenador/crear/', views.crear_entrenador, name='crear_entrenador'),
     path('entrenador/eliminar/<int:entrenador_id>/', views.eliminar_entrenador, name='eliminar_entrenador'),

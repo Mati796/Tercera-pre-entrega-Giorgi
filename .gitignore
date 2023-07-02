@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 User.txt
 
+
 # C extensions
 *.so
 
@@ -162,3 +163,4 @@ cython_debug/
 venv
 __pycache__
 db.sqlite3
+Codigos_viejos.py

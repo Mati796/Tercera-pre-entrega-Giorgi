@@ -11,7 +11,7 @@
 
 {% block body %}
 <button>
-<a class="navbar-brand" href={% url 'crear_gimnasio' %}>Crear Gimnasio</a>
+<a class="navbar-brand" href={% url 'Inicio:crear_gimnasio' %}>Crear Gimnasio</a>
 <button>
 
 <form action="" method="get">
@@ -23,8 +23,8 @@
 {% if gimnasios %}
 {% for gimnasio in gimnasios %}
 <li>{{gimnasio}}
-   <button><a href={% url 'eliminar_gimnasio' gimnasio.id %}>Eliminar</a></button>
-   <button><a href={% url 'modificar_gimnasio' gimnasio.id %}>Modificar</a></button>
+   <button><a href={% url 'Inicio:eliminar_gimnasio' gimnasio.id %}>Eliminar</a></button>
+   <button><a href={% url 'Inicio:modificar_gimnasio' gimnasio.id %}>Modificar</a></button>
 </li>
 {% endfor %}
 {% else %}

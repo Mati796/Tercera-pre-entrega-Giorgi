@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   Crear Pokemon
+{% endblock title %}
+
+
+{% block contenido %}
+   Crear Pokemon
+{% endblock contenido %}
+
+{% block body %}
+   
+   
+   <form action ={% url 'Inicio:crear_pokemon' %} method="POST">
+      {% csrf_token %}
+      <table>
+         {{form}}
+      </table>      
+      <button>Crear</button>
+   </form> 
+
+  
+{% endblock body %}

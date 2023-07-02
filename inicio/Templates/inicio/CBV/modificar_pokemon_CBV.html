@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   Modificar Pokemon
+{% endblock title %}
+
+
+{% block contenido %}
+   Modificar Pokemon
+{% endblock contenido %}
+
+{% block body %}
+   
+   
+   <form action ={% url 'Inicio:modificar_pokemon' pokemon.id %} method="POST">
+      {% csrf_token %}
+      <table>
+         {{form}}
+      </table>      
+      <button>Modificar</button>
+   </form> 
+
+  
+{% endblock body %}

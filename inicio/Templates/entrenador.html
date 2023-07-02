@@ -7,8 +7,8 @@
 
 {% block contenido %}
 <h2> Se creo el entrenador con nombre {{entrenador.nombre}}, edad {{entrenador.edad}} y que entrena pokemons de tipo {{entrenador.tipo_pokemon}}</h2>
-<button><a class="navbar-brand" href={% url 'crear_entrenador' %}>Crear otro entrenador</a></button>
-<button><a class="navbar-brand" href={% url 'listar_entrenador' %}>Volver a lista de entrenadores</a></button>
+<button><a class="navbar-brand" href={% url 'Inicio:crear_entrenador' %}>Crear otro entrenador</a></button>
+<button><a class="navbar-brand" href={% url 'Inicio:listar_entrenador' %}>Volver a lista de entrenadores</a></button>
 {% endblock contenido %}
 
 {% block body %}

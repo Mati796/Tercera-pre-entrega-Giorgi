@@ -11,20 +11,19 @@
 
 {% block body %}
 <button>
-<a class="navbar-brand" href={% url 'crear_entrenador' %}>Crear Entrenador</a>
+<a class="navbar-brand" href={% url 'Inicio:crear_entrenador' %}>Crear Entrenador</a>
 <button>
 
 <form action="" method="get">
    {{formulario2}}
-
   <button>Buscar</button>
 </form>
 
 {% if entrenadores %}
 {% for entrenador in entrenadores %}
 <li>{{entrenador}}
-   <button><a href={% url 'eliminar_entrenador' entrenador.id %}>Eliminar</a></button>
-   <button><a href={% url 'modificar_entrenador' entrenador.id %}>Modificar</a></button>
+   <button><a href={% url 'Inicio:eliminar_entrenador' entrenador.id %}>Eliminar</a></button>
+   <button><a href={% url 'Inicio:modificar_entrenador' entrenador.id %}>Modificar</a></button>
 </li>
 {% endfor %}
 {% else %}

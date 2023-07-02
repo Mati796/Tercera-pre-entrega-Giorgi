@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   Pokemon
+{% endblock title %}
+
+
+{% block contenido %}
+   {{pokemon.nombre}}
+{% endblock contenido %}
+
+{% block body %}
+   
+   <li>Numero de Pokedex: {{pokemon.pokedex}}</li>
+   <li>Descripcion: {{pokemon.descripcion}}</li>
+  
+{% endblock body %}

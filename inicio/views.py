@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect
 from django.template import Template
 from inicio.models import Pokemon, Entrenador, Gimnasio
 from inicio.form import CrearPokemonFormulario, BuscarPokemonFormulario, ModificarPokemonFormulario, CrearEntrenadorFormulario, BuscarEntrenadorFormulario, ModificarEntrenadorFormulario, CrearGimnasioFormulario, BuscarGimnasioFormulario, ModificarGimnasioFormulario
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+from django.urls import reverse_lazy
 
 # Create your views here.
 
@@ -13,59 +17,39 @@ def about_us(request):
     return render (request,'about_us.html')
 
 
-
-def crear_pokemon(request):
-    diccionario = {}
+class CrearPokemon(CreateView):
+    model = Pokemon
+    template_name = 'inicio/CBV/crear_pokemon_CBV.html'
+    fields = ['nombre','pokedex','descripcion']
+    success_url = reverse_lazy('Inicio:listar_pokemon')
     
-    if request.method == "POST":
-      formulario = CrearPokemonFormulario(request.POST)
-      if formulario.is_valid():
-          info = formulario.cleaned_data
-          pokemon = Pokemon(nombre=info['nombre'], pokedex=info['pokedex'])
-          pokemon.save()
-          diccionario['pokemon'] = pokemon
-          return render(request, "pokemon.html", diccionario)
-      else:
-          diccionario['formulario'] = formulario
-          return render(request, "pokemon.html", diccionario)
-          
-    formulario = CrearPokemonFormulario()
-    diccionario['formulario']= formulario
-    return render(request, "crear_pokemon.html", diccionario)
-
-def listar_pokemon(request):
-    formulario = BuscarPokemonFormulario(request.GET)
-    if formulario.is_valid():
-        nombre_a_buscar = formulario.cleaned_data['nombre']
-        listado_de_pokemons=Pokemon.objects.filter(nombre__icontains=nombre_a_buscar)  
-          
-      
-    formulario = BuscarPokemonFormulario()
-    return render(request,'listar_pokemon.html', {'formulario':formulario,'pokemons':listado_de_pokemons})
-
-def eliminar_pokemon(request, pokemon_id):
-    pokemon = Pokemon.objects.get(id=pokemon_id)
-    pokemon.delete()
     
-    return redirect('listar_pokemon')
+class ListarPokemon(ListView):
+    model = Pokemon
+    template_name = 'inicio/CBV/listar_pokemon_CBV.html'
+    context_object_name = 'pokemons'
 
-def modificar_pokemon(request, pokemon_id):
-    pokemon_a_modificar = Pokemon.objects.get(id=pokemon_id)
+
+class ModificarPokemon(UpdateView):
+    model = Pokemon
+    template_name = 'inicio/CBV/modificar_pokemon_CBV.html'
+    fields = ['nombre','pokedex', 'descripcion']
+    success_url = reverse_lazy('Inicio:listar_pokemon')
+
+
+class EliminarPokemon(DeleteView):
+    model = Pokemon
+    template_name = 'inicio/CBV/eliminar_pokemon_CBV.html'
+    success_url = reverse_lazy('Inicio:listar_pokemon')
+
+
+class MostrarPokemon(DetailView):
+    model = Pokemon
+    template_name = 'inicio/CBV/mostrar_pokemon_CBV.html'
     
-    if request.method == 'POST':
-        formulario = ModificarPokemonFormulario(request.POST)
-        if formulario.is_valid():
-            info = formulario.cleaned_data
-            pokemon_a_modificar.nombre = info['nombre']
-            pokemon_a_modificar.pokedex = info['pokedex']
-            pokemon_a_modificar.save()
-            return redirect ('listar_pokemon')
-            
-        else: 
-            return render(request, 'modificar_pokemon.html',{'formulario':formulario})
 
-    formulario = ModificarPokemonFormulario(initial={'nombre':pokemon_a_modificar.nombre, "pokedex":pokemon_a_modificar.pokedex})
-    return render(request, 'modificar_pokemon.html',{'formulario':formulario})
+
+
 
 
 
@@ -104,7 +88,7 @@ def eliminar_entrenador(request, entrenador_id):
     entrenador = Entrenador.objects.get(id=entrenador_id)
     entrenador.delete()
     
-    return redirect('listar_entrenador')
+    return redirect('Inicio:listar_entrenador')
 
 def modificar_entrenador(request, entrenador_id):
     entrenador_a_modificar = Entrenador.objects.get(id=entrenador_id)
@@ -117,7 +101,7 @@ def modificar_entrenador(request, entrenador_id):
             entrenador_a_modificar.edad = info['edad']
             entrenador_a_modificar.tipo_pokemon = info['tipo_pokemon']
             entrenador_a_modificar.save()
-            return redirect ('listar_entrenador')
+            return redirect ('Inicio:listar_entrenador')
             
         else: 
             return render(request, 'modificar_entrenador.html',{'formulario':formulario})
@@ -163,7 +147,7 @@ def eliminar_gimnasio(request, gimnasio_id):
     gimnasio = Gimnasio.objects.get(id=gimnasio_id)
     gimnasio.delete()
     
-    return redirect('listar_gimnasio')
+    return redirect('Inicio:listar_gimnasio')
  
 def modificar_gimnasio(request, gimnasio_id):
     gimnasio_a_modificar = Gimnasio.objects.get(id=gimnasio_id)
@@ -176,7 +160,7 @@ def modificar_gimnasio(request, gimnasio_id):
             gimnasio_a_modificar.ciudad = info['ciudad']
             gimnasio_a_modificar.tipo_pokemon = info['tipo_pokemon']
             gimnasio_a_modificar.save()
-            return redirect ('listar_gimnasio')
+            return redirect ('Inicio:listar_gimnasio')
             
         else: 
             return render(request, 'modificar_gimnasio.html',{'formulario':formulario})
