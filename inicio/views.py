@@ -6,6 +6,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
@@ -25,8 +27,8 @@ class CrearPokemon(CreateView):
     fields = ['nombre','pokedex','descripcion']
     success_url = reverse_lazy('Inicio:listar_pokemon')
     
-    
-class ListarPokemon(ListView):
+
+class ListarPokemon(LoginRequiredMixin, ListView):
     model = Pokemon
     template_name = 'inicio/CBV/listar_pokemon_CBV.html'
     context_object_name = 'pokemons'
@@ -74,6 +76,8 @@ def crear_entrenador(request):
     diccionario['formulario']= formulario
     return render(request, "crear_entrenador.html", diccionario)
 
+
+@login_required
 def listar_entrenador(request):
     
     formulario = BuscarEntrenadorFormulario(request.GET)
@@ -134,6 +138,7 @@ def crear_gimnasio(request):
     diccionario['formulario']= formulario
     return render(request, "crear_gimnasio.html", diccionario)
 
+@login_required
 def listar_gimnasio(request):
     formulario = BuscarGimnasioFormulario(request.GET)
     if formulario.is_valid():
