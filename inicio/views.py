@@ -17,6 +17,8 @@ def about_us(request):
     return render (request,'about_us.html')
 
 
+
+
 class CrearPokemon(CreateView):
     model = Pokemon
     template_name = 'inicio/CBV/crear_pokemon_CBV.html'
@@ -47,7 +49,6 @@ class MostrarPokemon(DetailView):
     model = Pokemon
     template_name = 'inicio/CBV/mostrar_pokemon_CBV.html'
     
-
 
 
 
