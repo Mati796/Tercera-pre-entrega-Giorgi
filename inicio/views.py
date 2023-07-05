@@ -19,35 +19,39 @@ def about_us(request):
     return render (request,'about_us.html')
 
 
-
-
-class CrearPokemon(CreateView):
+class CrearPokemon(LoginRequiredMixin,CreateView):
     model = Pokemon
     template_name = 'inicio/CBV/crear_pokemon_CBV.html'
     fields = ['nombre','pokedex','descripcion']
     success_url = reverse_lazy('Inicio:listar_pokemon')
     
+    
+@login_required
+def listar_pokemon(request):
+    formulario = BuscarPokemonFormulario(request.GET)
+    if formulario.is_valid():
+        nombre_a_buscar = formulario.cleaned_data['nombre']
+        listado_de_pokemons=Pokemon.objects.filter(nombre__icontains=nombre_a_buscar)  
+          
+      
+    formulario = BuscarPokemonFormulario()
+    return render(request,'inicio/CBV/listar_pokemon_CBV.html', {'formulario':formulario,'pokemons':listado_de_pokemons})
 
-class ListarPokemon(LoginRequiredMixin, ListView):
-    model = Pokemon
-    template_name = 'inicio/CBV/listar_pokemon_CBV.html'
-    context_object_name = 'pokemons'
 
-
-class ModificarPokemon(UpdateView):
+class ModificarPokemon(LoginRequiredMixin,UpdateView):
     model = Pokemon
     template_name = 'inicio/CBV/modificar_pokemon_CBV.html'
     fields = ['nombre','pokedex', 'descripcion']
     success_url = reverse_lazy('Inicio:listar_pokemon')
 
 
-class EliminarPokemon(DeleteView):
+class EliminarPokemon(LoginRequiredMixin,DeleteView):
     model = Pokemon
     template_name = 'inicio/CBV/eliminar_pokemon_CBV.html'
     success_url = reverse_lazy('Inicio:listar_pokemon')
 
 
-class MostrarPokemon(DetailView):
+class MostrarPokemon(LoginRequiredMixin,DetailView):
     model = Pokemon
     template_name = 'inicio/CBV/mostrar_pokemon_CBV.html'
     
@@ -56,7 +60,7 @@ class MostrarPokemon(DetailView):
 
 
 
-
+@login_required
 def crear_entrenador(request):
     diccionario = {}
     
@@ -89,12 +93,14 @@ def listar_entrenador(request):
     formulario = BuscarEntrenadorFormulario()
     return render(request,'listar_entrenador.html', {'formulario2':formulario,'entrenadores':listado_de_entrenadores})
 
+@login_required
 def eliminar_entrenador(request, entrenador_id):
     entrenador = Entrenador.objects.get(id=entrenador_id)
     entrenador.delete()
     
     return redirect('Inicio:listar_entrenador')
 
+@login_required
 def modificar_entrenador(request, entrenador_id):
     entrenador_a_modificar = Entrenador.objects.get(id=entrenador_id)
     
@@ -118,7 +124,7 @@ def modificar_entrenador(request, entrenador_id):
 
 
 
-
+@login_required
 def crear_gimnasio(request):
     diccionario = {}
     
@@ -148,13 +154,14 @@ def listar_gimnasio(request):
     formulario = BuscarGimnasioFormulario()
     return render(request,'listar_gimnasio.html', {'formulario':formulario,'gimnasios':listado_de_gimnasios})
 
-
+@login_required
 def eliminar_gimnasio(request, gimnasio_id):
     gimnasio = Gimnasio.objects.get(id=gimnasio_id)
     gimnasio.delete()
     
     return redirect('Inicio:listar_gimnasio')
- 
+
+@login_required
 def modificar_gimnasio(request, gimnasio_id):
     gimnasio_a_modificar = Gimnasio.objects.get(id=gimnasio_id)
     
@@ -173,3 +180,6 @@ def modificar_gimnasio(request, gimnasio_id):
 
     formulario = ModificarGimnasioFormulario(initial={'nombre':gimnasio_a_modificar.nombre, "ciudad":gimnasio_a_modificar.ciudad, "tipo_pokemon":gimnasio_a_modificar.tipo_pokemon})
     return render(request, 'modificar_gimnasio.html',{'formulario':formulario})
+
+
+

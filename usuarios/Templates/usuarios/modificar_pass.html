@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   Modificación de contraseña
+{% endblock title %}
+
+
+{% block contenido %}
+   Modificación de contraseña
+{% endblock contenido %}
+
+{% block body %}
+   
+   
+   <form action ={% url 'usuarios:modificar_pass' %} method="POST">
+      {% csrf_token %}
+      <table>
+         {{form}}
+      </table>      
+      <button>Cambiar contraseña</button>
+   </form> 
+
+  
+{% endblock body %}

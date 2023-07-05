@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   Edicion de perfil
+{% endblock title %}
+
+
+{% block contenido %}
+   Edicion de Perfil
+{% endblock contenido %}
+
+{% block body %}
+   
+   
+   <form action ={% url 'usuarios:edicion_perfil' %} method="POST" enctype='multipart/form-data'>
+      {% csrf_token %}
+      <table>
+         {{formulario}}
+      </table>      
+      <button>Guardar cambios</button>
+      <button type = 'button'><a href={% url 'usuarios:modificar_pass' %}>Cambiar contraseña</a></button>
+   </form> 
+
+  
+{% endblock body %}

@@ -8,8 +8,7 @@ urlpatterns = [
     path('', views.Inicio, name = 'Inicio'),
     path('about_us/', views.about_us, name = 'about_us'),
     
-    
-    path('pokemon/', views.ListarPokemon.as_view(), name='listar_pokemon'),
+    path('pokemon/', views.listar_pokemon, name='listar_pokemon'),
     path('pokemon/crear/',views.CrearPokemon.as_view(), name='crear_pokemon'),
     path('pokemon/eliminar/<int:pk>/', views.EliminarPokemon.as_view(), name='eliminar_pokemon'),
     path('pokemon/modificar/<int:pk>/', views.ModificarPokemon.as_view(), name='modificar_pokemon'),
