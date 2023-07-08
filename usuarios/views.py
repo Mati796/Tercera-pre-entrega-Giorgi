@@ -7,7 +7,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from usuarios.form import MiFormularioDeCreacionDeUsuarios, MiFormularioDeEdicionDeDatosDeUsuario
 from django.urls import reverse_lazy
 from usuarios.models import InfoExtra
-
+from django.contrib.auth.models import User
+from django.views.generic.detail import DetailView
 
 # Create your views here.
 
@@ -60,6 +61,13 @@ def edicion_perfil(request):
         formulario = MiFormularioDeEdicionDeDatosDeUsuario(request.POST,request.FILES,instance=request.user)
         if formulario.is_valid():
             
+            descripcion = formulario.cleaned_data.get('descripcion')
+            if descripcion:
+              info_extra_user.descripcion = descripcion
+              info_extra_user.save()
+            
+            
+            
             avatar = formulario.cleaned_data.get('avatar')
             if avatar:
               info_extra_user.avatar = avatar
@@ -80,3 +88,6 @@ class ModificarPass(LoginRequiredMixin, PasswordChangeView):
     template_name = 'usuarios/modificar_pass.html'
     success_url = reverse_lazy('usuarios:edicion_perfil')
     
+    
+def ver_perfil(request):
+    return render(request,'usuarios/ver_perfil.html')

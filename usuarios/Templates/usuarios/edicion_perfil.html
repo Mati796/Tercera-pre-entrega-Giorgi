@@ -16,6 +16,7 @@
       {% csrf_token %}
       <table>
          {{formulario}}
+         {{formulario.media}}
       </table>      
       <button>Guardar cambios</button>
       <button type = 'button'><a href={% url 'usuarios:modificar_pass' %}>Cambiar contraseña</a></button>

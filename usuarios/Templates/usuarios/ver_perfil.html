@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Mi perfil
+{% endblock title %}
+
+
+{% block contenido %}
+Mi perfil
+{% endblock contenido %}
+
+{% block body %}
+   
+  <li>Nombre de usuario: {{request.user.username}}</li>
+  <li>Nombre: {{request.user.first_name}}</li>
+  <li>Apellido: {{request.user.last_name}}</li> 
+  <li>Email: {{request.user.email}}</li>
+  <li>Lema personal: {{request.user.infoextra.descripcion | safe}}</li>
+  <li>Avatar:</li>
+  <img src="{{request.user.infoextra.avatar.url}}" alt="" height=='40px'>
+
+<button><a class="navbar-brand" href={% url 'usuarios:edicion_perfil' %}>Editar datos</a></button>
+
+
+{% endblock body %}

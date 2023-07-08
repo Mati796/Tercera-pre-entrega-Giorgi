@@ -11,7 +11,10 @@
 
 {% block body %}
    
-   <li>Numero de Pokedex: {{pokemon.pokedex}}</li>
-   <li>Descripcion: {{pokemon.descripcion}}</li>
-  
+   <li>Tipo: {{pokemon.tipo}}</li>
+   <li>Evolucion: {{pokemon.evolucion}}</li>
+   <li>Fecha de Crecion: {{pokemon.fecha_creacion}}</li>
+   <li>Descripcion: {{pokemon.descripcion | safe}}</li>
+   <img src="{{request.pokemon.avatar.url}}" alt="" height=='40px'>
+
 {% endblock body %}

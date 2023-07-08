@@ -12,10 +12,11 @@
 {% block body %}
    
    
-   <form action ={% url 'Inicio:crear_pokemon' %} method="POST">
+   <form action ={% url 'Inicio:crear_pokemon' %} method="POST" enctype='multipart/form-data'>
       {% csrf_token %}
       <table>
          {{form}}
+         {{form.media}}
       </table>      
       <button>Crear</button>
    </form> 

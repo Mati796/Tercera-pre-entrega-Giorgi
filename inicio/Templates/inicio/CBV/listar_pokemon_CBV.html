@@ -22,12 +22,12 @@
 {% if pokemons %}
 {% for pokemon in pokemons %}
 <li>{{pokemon}}
-<button><a href={% url 'Inicio:mostrar_pokemon' pokemon.id %}>Detalles</a></button>
+<button><a href={% url 'Inicio:mostrar_pokemon' pokemon.id %}>Ver mas</a></button>
 <button><a href={% url 'Inicio:eliminar_pokemon' pokemon.id %}>Eliminar</a></button>
 <button><a href={% url 'Inicio:modificar_pokemon' pokemon.id %}>Modificar</a></button>
 </li>
 {% endfor %}
 {% else %}
-<p>No se encontraron datos cargados.</p>
+<p>No hay pokemons creados aún.</p>
 {% endif %}
 {% endblock body %}

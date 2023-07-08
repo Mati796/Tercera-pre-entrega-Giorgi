@@ -1,14 +1,19 @@
 from django.db import models
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 
 class Pokemon(models.Model):
     nombre = models.CharField(max_length=20)
-    pokedex = models.IntegerField()
-    descripcion = models.TextField(null=True)
+    tipo = models.CharField(max_length=20)
+    evolucion = models.CharField(max_length=20)
+    fecha_creacion = models.DateField()
+    descripcion = RichTextField(null=True)
+    icono = models.ImageField(upload_to='iconos',null=True,blank=True)
+    
     
     def __str__(self):
-        return f"Pokemon: {self.nombre} - Numero de pokedex: {self.pokedex}"
+        return f"Pokemon: {self.nombre} -Tipo: {self.tipo} - Evoluciona en: {self.evolucion} - Fue creado con fecha: {self.fecha_creacion}"
     
     
 class Entrenador(models.Model):

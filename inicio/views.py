@@ -1,3 +1,5 @@
+from typing import Any, Dict
+from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect
 from django.template import Template
 from inicio.models import Pokemon, Entrenador, Gimnasio
@@ -22,26 +24,34 @@ def about_us(request):
 class CrearPokemon(LoginRequiredMixin,CreateView):
     model = Pokemon
     template_name = 'inicio/CBV/crear_pokemon_CBV.html'
-    fields = ['nombre','pokedex','descripcion']
+    fields = ['nombre','tipo','evolucion','fecha_creacion','descripcion','icono']
     success_url = reverse_lazy('Inicio:listar_pokemon')
     
     
-@login_required
-def listar_pokemon(request):
-    formulario = BuscarPokemonFormulario(request.GET)
-    if formulario.is_valid():
-        nombre_a_buscar = formulario.cleaned_data['nombre']
-        listado_de_pokemons=Pokemon.objects.filter(nombre__icontains=nombre_a_buscar)  
-          
-      
-    formulario = BuscarPokemonFormulario()
-    return render(request,'inicio/CBV/listar_pokemon_CBV.html', {'formulario':formulario,'pokemons':listado_de_pokemons})
+class ListarPokemon(LoginRequiredMixin, ListView):
+    model = Pokemon
+    template_name = 'inicio/CBV/listar_pokemon_CBV.html'
+    context_object_name = 'pokemons'
+    
+    def get_queryset(self):
+        listado_de_pokemons=[]
+        formulario = BuscarPokemonFormulario(self.request.GET)
+        if formulario. is_valid():
+            nombre_a_buscar = formulario.cleaned_data['nombre']
+            listado_de_pokemons=Pokemon.objects.filter(nombre__icontains=nombre_a_buscar)
+        return listado_de_pokemons
+        
+    
+    def get_context_data(self, **kwargs):
+        contexto = super().get_context_data(**kwargs)
+        contexto['formulario'] = BuscarPokemonFormulario()
+        return contexto
 
 
 class ModificarPokemon(LoginRequiredMixin,UpdateView):
     model = Pokemon
     template_name = 'inicio/CBV/modificar_pokemon_CBV.html'
-    fields = ['nombre','pokedex', 'descripcion']
+    fields = ['nombre','tipo','evolucion','fecha_creacion','descripcion','icono']
     success_url = reverse_lazy('Inicio:listar_pokemon')
 
 
@@ -183,3 +193,7 @@ def modificar_gimnasio(request, gimnasio_id):
 
 
 
+
+    
+    
+    
