@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   Mensajes
+{% endblock title %}
+
+
+{% block contenido %}
+   Mensajes
+{% endblock contenido %}
+
+ {% block body %}
+<button>
+<a class="navbar-brand" href={% url 'mensajes:crear_mensaje' %}>Crear Mensaje</a>
+<button>
+
+
+{% if mensajes %}
+{% for mensaje in mensajes %}
+<li>{{mensaje | safe }}
+</li>
+{% endfor %}
+{% else %}
+<p>No hay mensajes creados aún.</p>
+{% endif %}
+{% endblock body %}

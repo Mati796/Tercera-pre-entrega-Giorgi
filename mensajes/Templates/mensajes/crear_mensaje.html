@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   Crear mensaje
+{% endblock title %}
+
+
+{% block contenido %}
+   Crear mensajes
+{% endblock contenido %}
+
+ {% block body %}
+    <form action ={% url 'mensajes:crear_mensaje' %} method="POST">
+        {% csrf_token %}
+        <table>
+           {{formulario}}
+           {{formulario.media}}
+        </table>      
+        <button>Crear mensaje</button>
+     </form> 
+{% endblock body %}  

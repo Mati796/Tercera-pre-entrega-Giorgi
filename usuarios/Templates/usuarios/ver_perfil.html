@@ -17,8 +17,10 @@ Mi perfil
   <li>Email: {{request.user.email}}</li>
   <li>Lema personal: {{request.user.infoextra.descripcion | safe}}</li>
   <li>Avatar:</li>
+  {% if  request.user.infoextra.avatar %}
   <img src="{{request.user.infoextra.avatar.url}}" alt="" height=='40px'>
-
+  {% endif %}
+  
 <button><a class="navbar-brand" href={% url 'usuarios:edicion_perfil' %}>Editar datos</a></button>
 
 

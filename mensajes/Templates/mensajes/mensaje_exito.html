@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   Tu mensaje ha sido creado con exito
+{% endblock title %}
+
+
+{% block contenido %}
+Tu mensaje ha sido creado con exito
+{% endblock contenido %}
+
+ {% block body %}
+<button>
+<a class="navbar-brand" href={% url 'mensajes:mensajes' %}>Volver al listado de mensajes</a>
+<button>
+
+{% endblock body %}
