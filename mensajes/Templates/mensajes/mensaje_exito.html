@@ -9,9 +9,8 @@
 Tu mensaje ha sido creado con exito
 {% endblock contenido %}
 
- {% block body %}
-<button>
-<a class="navbar-brand" href={% url 'mensajes:mensajes' %}>Volver al listado de mensajes</a>
-<button>
+{% block body %}
+
+<button><a class="navbar-brand" href={% url 'mensajes:mensajes' %}>Volver al listado de mensajes</a></button>
 
 {% endblock body %}

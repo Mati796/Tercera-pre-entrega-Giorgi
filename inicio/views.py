@@ -41,7 +41,6 @@ class ListarPokemon(LoginRequiredMixin, ListView):
             listado_de_pokemons=Pokemon.objects.filter(nombre__icontains=nombre_a_buscar)
         return listado_de_pokemons
         
-    
     def get_context_data(self, **kwargs):
         contexto = super().get_context_data(**kwargs)
         contexto['formulario'] = BuscarPokemonFormulario()
@@ -99,7 +98,6 @@ def listar_entrenador(request):
         nombre_a_buscar = formulario.cleaned_data['nombre']
         listado_de_entrenadores=Entrenador.objects.filter(nombre__icontains=nombre_a_buscar)  
           
-      
     formulario = BuscarEntrenadorFormulario()
     return render(request,'listar_entrenador.html', {'formulario2':formulario,'entrenadores':listado_de_entrenadores})
 

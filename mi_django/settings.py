@@ -133,3 +133,6 @@ LOGIN_URL = '/usuarios/login/'
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+DATE_INPUT_FORMATS = ["%d/%m/%Y"]
+USE_L10N = False

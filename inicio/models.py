@@ -11,9 +11,9 @@ class Pokemon(models.Model):
     descripcion = RichTextField(null=True)
     icono = models.ImageField(upload_to='iconos',null=True,blank=True)
     
-    
+
     def __str__(self):
-        return f"Pokemon: {self.nombre} -Tipo: {self.tipo} - Evoluciona en: {self.evolucion} - Fue creado con fecha: {self.fecha_creacion}"
+        return f"Pokemon: {self.nombre} -Tipo: {self.tipo} - Evoluciona en: {self.evolucion}"
     
     
 class Entrenador(models.Model):

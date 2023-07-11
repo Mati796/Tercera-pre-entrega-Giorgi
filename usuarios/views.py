@@ -20,17 +20,10 @@ def login(request):
         if formulario.is_valid():
            usuario = formulario.cleaned_data['username']
            contrasenia = formulario.cleaned_data['password']
-           
            user = authenticate(username=usuario,password=contrasenia)
-           
            django_login(request, user)
-           
            InfoExtra.objects.get_or_create(user=user)
-           
-                      
            return redirect('Inicio:Inicio')
-           
-           
         else: 
            return render(request, 'usuarios/login.html', {'formulario':formulario})    
     
@@ -49,7 +42,6 @@ def registrarse(request):
         else:
             return render(request,'usuarios/registrarse.html',{'formulario':formulario})   
     
-    
     formulario= MiFormularioDeCreacionDeUsuarios()
     return render(request,'usuarios/registrarse.html',{'formulario':formulario})
 
@@ -66,22 +58,15 @@ def edicion_perfil(request):
               info_extra_user.descripcion = descripcion
               info_extra_user.save()
             
-            
-            
             avatar = formulario.cleaned_data.get('avatar')
             if avatar:
               info_extra_user.avatar = avatar
               info_extra_user.save()
             
-            
             formulario.save()
             return redirect('Inicio:Inicio')
-            
     else:
-        formulario = MiFormularioDeEdicionDeDatosDeUsuario(initial={'avatar':request.user.infoextra.avatar},instance=request.user)
-        
-    
-    
+        formulario = MiFormularioDeEdicionDeDatosDeUsuario(initial={'avatar':request.user.infoextra.avatar,'descripcion':request.user.infoextra.descripcion},instance=request.user)
     return render(request, 'usuarios/edicion_perfil.html',{'formulario':formulario})
 
 class ModificarPass(LoginRequiredMixin, PasswordChangeView):

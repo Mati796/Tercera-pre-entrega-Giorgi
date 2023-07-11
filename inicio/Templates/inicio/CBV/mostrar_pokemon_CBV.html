@@ -13,8 +13,11 @@
    
    <li>Tipo: {{pokemon.tipo}}</li>
    <li>Evolucion: {{pokemon.evolucion}}</li>
-   <li>Fecha de Crecion: {{pokemon.fecha_creacion}}</li>
+   <li>Fecha de Creacion: {{pokemon.fecha_creacion|date:'d/m/Y'}}</li>
    <li>Descripcion: {{pokemon.descripcion | safe}}</li>
-   <img src="{{request.pokemon.avatar.url}}" alt="" height=='40px'>
-
+   {% if pokemon.icono %}
+   <img src="{{pokemon.icono.url}}" alt="" height=='40px'>
+   {% else %}
+   <li>No hay icono cargado</li>
+   {% endif %}
 {% endblock body %}
